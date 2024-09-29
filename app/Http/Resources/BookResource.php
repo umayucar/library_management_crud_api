@@ -19,6 +19,9 @@ class BookResource extends JsonResource
             'author_id' => $this->author_id,
             'title' => $this->title,
             'description' => $this->description,
+            'publication_year' => $this->publication_year,
+            'publisher' => $this->publisher, 
+            'page_count' => $this->page_count, 
             'created_at' => $this->created_at->format('Y-m-d H:i:s'), 
             'author' => $this->whenLoaded('author', function () {
                 return [

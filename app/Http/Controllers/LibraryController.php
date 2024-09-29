@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLibraryRequest;
 use App\Http\Requests\UpdateLibraryRequest;
+use App\Http\Resources\LibraryResource;
 use App\Models\Library;
 use App\Traits\RespondsWithJson;
 
@@ -15,9 +16,8 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        //return Library::all();
-        return Library::with('books')->get();
-
+        $libraries = Library::with('books')->get();
+        return LibraryResource::collection($libraries);
     }
 
     /**
@@ -33,7 +33,8 @@ class LibraryController extends Controller
      */
     public function show(string $id)
     {
-        return Library::with('books')->find($id);
+        $library = Library::with('books')->find($id);
+        return new LibraryResource($library);
     }
 
     /**
