@@ -155,13 +155,13 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```http
     POST http://127.0.0.1:8000/api/authors/1/media
     ```
-    **x-www-form-urlencoded**
+     **x-www-form-urlencoded**
 
     | Key            | Value                | Açıklama                |
     |----------------|----------------------|-------------------------|
     | `image`        | (Dosya Seç)          | Yazarın Yeni Fotoğrafı  |
     
-    Bu istek, belirli bir yazarın profil fotoğrafını günceller.
+     Bu istek, belirli bir yazarın profil fotoğrafını günceller.
 
   - **Yazar Silme (DELETE)**:
     ```http
