@@ -157,9 +157,9 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
      ```
       **x-www-form-urlencoded**
 
-    | Key            | Value                | Açıklama                |
-    |----------------|----------------------|-------------------------|
-    | `image`        | (Dosya Seç)          | Yazarın Yeni Fotoğrafı  |
+     | Key            | Value                | Açıklama                |
+     |----------------|----------------------|-------------------------|
+     | `image`        | (Dosya Seç)          | Yazarın Yeni Fotoğrafı  |
     
      Bu istek, belirli bir yazarın profil fotoğrafını günceller.
 
