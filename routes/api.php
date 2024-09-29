@@ -20,8 +20,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('books', BookController::class);
     Route::apiResource('authors', AuthorController::class);
     Route::apiResource('libraries', LibraryController::class);
+
+    // for media updates:
+    Route::post('/books/{book}/media', [BookController::class, 'updateMedia']);
+    Route::post('/authors/{author}/media', [AuthorController::class, 'updateMedia']);
 });
 
-// web.php veya api.php
-Route::post('/books/{book}/media', [BookController::class, 'updateMedia']);
-Route::post('/authors/{author}/media', [AuthorController::class, 'updateMedia']);
