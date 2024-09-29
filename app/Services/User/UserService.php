@@ -7,24 +7,38 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserService
 {
     public function register(array $data): array
     {
-        $now = Carbon::now(); // Get the current date and time
-        $tokenExpired = $now->addHours(24);
+        $validator = Validator::make($data, [
+            'email' => 'required|email|unique:users,email',
+        ]);
+    
+        if ($validator->fails()) {
+            // Handle validation failure (you can customize the response)
+            return [
+                'errors' => $validator->errors(),
+            ];
+        }
+        else{
+            $now = Carbon::now(); // Get the current date and time
+            $tokenExpired = $now->addHours(24);
 
-        $data['password'] = Hash::make($data['password']);
-        $user = User::create($data);
+            $data['password'] = Hash::make($data['password']);
 
-        return [
-            'token' => $user->createToken('MyApp')->plainTextToken,
-            'name' => $user->name,
-            'surname' => $user->surname,
-            'email' => $user->email,
-            'token_expired' => $tokenExpired,
-        ];
+            $user = User::create($data);
+
+            return [
+                'token' => $user->createToken('MyApp')->plainTextToken,
+                'name' => $user->name,
+                'surname' => $user->surname,
+                'email' => $user->email,
+                'token_expired' => $tokenExpired,
+            ];
+        }
     }
 
     public function login(Request $request): array
@@ -34,6 +48,7 @@ class UserService
             $success = [
                 'token' => $authUser->createToken('MyApp')->plainTextToken,
                 'user' => [
+                    'id' => $authUser->id,
                     'name' => $authUser->name,
                     'surname' => $authUser->surname,
                     'email' => $authUser->email,

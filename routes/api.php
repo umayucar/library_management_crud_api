@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('books', BookController::class);
     Route::apiResource('authors', AuthorController::class);
+    Route::apiResource('libraries', LibraryController::class);
 });
+
+// web.php veya api.php
+Route::post('/books/{book}/media', [BookController::class, 'updateMedia']);
+Route::post('/authors/{author}/media', [AuthorController::class, 'updateMedia']);

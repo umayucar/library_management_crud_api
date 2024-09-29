@@ -5,6 +5,7 @@ namespace App\Interfaces;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 interface BookRepositoryInterface
 {
@@ -40,6 +41,15 @@ interface BookRepositoryInterface
     */
     public function update(UpdateBookRequest $request, Model $model): Model;
 
+    /**
+    * Update the media for a given book.
+    *
+    * @param Request $request
+    * @param Model $model
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function updateMedia(Request $request, Model $model);
+    
     /**
     * Delete a book by its ID.
     *

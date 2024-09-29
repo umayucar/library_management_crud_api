@@ -9,6 +9,7 @@ use App\Models\Author;
 use App\Services\ImageService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class AuthorRepository implements AuthorRepositoryInterface
 {
@@ -75,11 +76,39 @@ class AuthorRepository implements AuthorRepositoryInterface
     }
 
     /**
-     * Delete an author by their ID.
-     *
-     * @param int $id
-     * @return void
-     */
+    * Update the media for a given book.
+    *
+    * @param Request $request
+    * @param Model $model
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function updateMedia(Request $request, Model $model)
+    {
+        // Retrieve the existing media items associated with the book
+        $media = $model->getMedia('author');
+
+        // Check if media items exist
+        if (!$media) {
+            return response()->json(['message' => __('app.media_not_found')], 404); 
+        }
+
+        // Check if a new image file has been uploaded
+        if ($request->hasFile('image')) {
+            $this->imageUploadService->updateImage($model, $request->file('image'), 'author');
+        }
+
+        // Load the media relationship to include media data in the response
+        $model->load('media');
+
+        return $model;     
+    }
+
+    /**
+    * Delete an author by their ID.
+    *
+    * @param int $id
+    * @return void
+    */
     public function delete($id): void
     {
         $author = $this->find($id);

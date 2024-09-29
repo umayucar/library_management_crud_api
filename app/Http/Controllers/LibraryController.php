@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLibraryRequest;
 use App\Http\Requests\UpdateLibraryRequest;
+use App\Models\Library;
 use App\Traits\RespondsWithJson;
-use Illuminate\Http\Request;
 
 class LibraryController extends Controller
 {
@@ -15,7 +15,9 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        //
+        //return Library::all();
+        return Library::with('books')->get();
+
     }
 
     /**
@@ -31,7 +33,7 @@ class LibraryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Library::with('books')->find($id);
     }
 
     /**

@@ -19,8 +19,7 @@ class Book extends Model implements HasMedia
     * @var array<int, string>
     */
     protected $fillable = [
-        'author_id',   
-        'isbn',    
+        'author_id',      
         'title',         
         'description',   
         'publication_year',
@@ -49,7 +48,7 @@ class Book extends Model implements HasMedia
     */
     public function library()
     {
-        return $this->belongsToMany(Library::class, 'book_library');  
+        return $this->belongsToMany(Library::class, 'library_books');  
     }
 }
 

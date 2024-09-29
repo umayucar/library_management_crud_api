@@ -5,6 +5,7 @@ namespace App\Interfaces;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 interface AuthorRepositoryInterface 
 {
@@ -30,6 +31,15 @@ interface AuthorRepositoryInterface
     * @return Model
     */
     public function create(StoreAuthorRequest $request): Model;
+
+    /**
+    * Update the media for a given author.
+    *
+    * @param Request $request
+    * @param Model $model
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function updateMedia(Request $request, Model $model);
 
     /**
     * Update an existing author.

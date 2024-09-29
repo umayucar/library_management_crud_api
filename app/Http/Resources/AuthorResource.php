@@ -25,7 +25,7 @@ class AuthorResource extends JsonResource
                         'author_id' => $mediaItem->model_id,
                         'file_name' => $mediaItem->file_name,
                         'mime_type' => $mediaItem->mime_type,
-                        'created_at' => $mediaItem->created_at,
+                        'created_at' => $mediaItem->created_at->format('Y-m-d H:i:s'),
                     ];
                 });
             }),

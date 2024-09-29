@@ -31,4 +31,10 @@ return [
     
     // Library Messages
     'library_not_found' => 'Kütüphane bulunamadı.',
+
+    // Image Messages
+    'media_added' => 'Resim başarıyla eklendi.',
+    'media_updated' => 'Resim başarıyla güncellendi.',
+    'media_not_found' => 'Resim bulunamadı.',
+
 ];

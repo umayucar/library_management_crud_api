@@ -6,8 +6,10 @@ use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Http\Resources\AuthorResource;
 use App\Interfaces\AuthorRepositoryInterface;
+use App\Models\Author;
 use App\Traits\RespondsWithJson;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
@@ -94,5 +96,11 @@ class AuthorController extends Controller
 
         $this->authorRepository->delete($id);
         return $this->successResponse(__('app.author_deleted'));
+    }
+
+    public function updateMedia(Request $request, Author $author)
+    {
+        $updated = $this->authorRepository->updateMedia($request, $author);
+        return response()->json(['message' => __('app.media_updated'), 'author' => new AuthorResource($updated)]);     
     }
 }

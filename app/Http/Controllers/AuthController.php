@@ -26,14 +26,17 @@ class AuthController extends Controller
     * @param RegisterRequest $request
     * @return JsonResponse
     */
-    public function register(RegisterRequest $request): JsonResponse
+    public function register(RegisterRequest $request)
     {
-        $result = $this->userService->register($request->validated());
+        $result = $this->userService->register($request->validated());    
 
-        if (isset($result['error']) && $result['error']) {
-            return $this->validationErrorResponse($result['data']);
+        // Check if there are errors in the result
+        if (isset($result['errors'])) {
+            // Return validation error response
+            return $this->validationErrorResponse($result);
         }
 
+        // If no errors, return success response
         return $this->createdResponse($result, __('app.register_success'));
     }
 

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Http\Resources\BookResource;
 use App\Interfaces\BookRepositoryInterface;
+use App\Models\Book;
 use App\Traits\RespondsWithJson;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -22,12 +25,11 @@ class BookController extends Controller
     /**
      * Display a listing of the books.
      *
-     * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index()
     {
         $books = $this->bookRepository->all();
-        return response()->json($books);
+        return BookResource::collection($books);
     }
 
     /**
@@ -41,7 +43,7 @@ class BookController extends Controller
         $book = $this->bookRepository->find($id);
 
         if ($book) {
-            return response()->json($book);
+            return $this->successResponse(__('app.book_found'), new BookResource($book));
         }
         return $this->errorResponse(__('app.book_not_found'), 404);
     }
@@ -55,7 +57,7 @@ class BookController extends Controller
     public function store(StoreBookRequest $request): JsonResponse
     {
         $book = $this->bookRepository->create($request);
-        return $this->successResponse(__('app.book_added'), $book);
+        return $this->successResponse(__('app.book_added'), new BookResource($book));
     }
 
     /**
@@ -68,9 +70,10 @@ class BookController extends Controller
     public function update(UpdateBookRequest $request, $id): JsonResponse
     {
         $book = $this->bookRepository->find($id);
+
         if ($book) {
             $updatedBook = $this->bookRepository->update($request, $book);
-            return $this->successResponse(__('app.book_updated'), $updatedBook);
+            return $this->successResponse(__('app.book_updated'), new BookResource($updatedBook));
         }
         return $this->errorResponse(__('app.book_not_found'), 404);
     }
@@ -91,5 +94,11 @@ class BookController extends Controller
 
         $this->bookRepository->delete($id);
         return $this->successResponse(__('app.book_deleted'));
+    }
+
+    public function updateMedia(Request $request, Book $book)
+    {
+        $updated = $this->bookRepository->updateMedia($request, $book);
+        return response()->json(['message' => __('app.media_updated'), 'author' => new BookResource($updated)]); 
     }
 }
