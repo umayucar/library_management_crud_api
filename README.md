@@ -237,7 +237,7 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
   - **Kitap Güncelleme için Versiyon Listesi (GET)**:
     ```http
     GET http://127.0.0.1:8000/api/books/1/versions
-    
+    ```
     Bu istek, belirli bir kitabın yapılan güncellemeleri sonucunda oluşan versiyonlarını listeler.
     İstek URL'sinde belirtilen 1 kitap ID'sidir ve bu kitap ile ilgili tüm versiyon bilgilerini döner.
 
