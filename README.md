@@ -54,12 +54,12 @@ Bu projenin çalışabilmesi için aşağıdaki gereksinimlerin karşılandığ�
 
 1. **Depoyu klonlayın**:
     ```bash
-    git clone https://github.com/kullanici-adi/proje-adi.git
+    git clone https://github.com/umayucar/library_management_api.git
     ```
 
 2. **Proje dizinine geçin**:
     ```bash
-    cd proje-adi
+    cd library_management_api
     ```
 
 3. **Gerekli bağımlılıkları yükleyin**:
