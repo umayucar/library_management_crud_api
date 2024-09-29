@@ -90,7 +90,6 @@ Bu projenin çalışabilmesi için aşağıdaki gereksinimlerin karşılandığ�
     ```bash
     php artisan serve
     ```
-    ```
 
 ## Kullanılan Paketler
 
