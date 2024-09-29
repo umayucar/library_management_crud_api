@@ -102,10 +102,68 @@ Bu projenin çalışabilmesi için aşağıdaki gereksinimlerin karşılandığ�
 - **Revizyon Takibi**: Yapılan değişiklikler Versionable paketi ile kaydedilmektedir.
 - **Medya Yönetimi**: Kitaplara ve yazarlara medya dosyaları yüklenebilir.
 
-## Geliştirici Notları
 
-- Bu proje OOP prensiplerine uygun olarak geliştirilmiştir.
-- Laravel'in güçlü ORM yapısı ve paket entegrasyonları kullanılmıştır.
+## Postman ile API Testi
+
+Projeyi Postman kullanarak test edebilmek için aşağıdaki adımları izleyin:
+
+### 1. Postman'i İndirin ve Kurun
+
+- [Postman](https://www.postman.com/downloads/) uygulamasını indirin ve kurun.
+
+### 2. API URL'leri ve Test Senaryoları
+
+Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki adımları izleyin:
+
+- **Base URL**: Geliştirme sunucusu başlatıldıktan sonra projeye erişmek için `http://127.0.0.1:8000` adresini kullanabilirsiniz.
+  
+  ### Örnek API İstekleri
+  
+  - **Kitap Ekleme (POST)**:
+    ```http
+    POST http://127.0.0.1:8000/api/books
+    ```
+    **Body (JSON)**:
+    ```json
+    {
+      "title": "Kitap Adı",
+      "author_id": 1,
+      "published_year": "2023"
+    }
+    ```
+    Bu istek, yeni bir kitap eklemenizi sağlar.
+
+  - **Kitap Listeleme (GET)**:
+    ```http
+    GET http://127.0.0.1:8000/api/books
+    ```
+    Bu istek, mevcut kitapların listesini döner.
+
+  - **Kitap Detay Görüntüleme (GET)**:
+    ```http
+    GET http://127.0.0.1:8000/api/books/1
+    ```
+    Bu istek, belirli bir kitabın detayını döner (kitap ID'si ile).
+
+  - **Kitap Güncelleme (PUT)**:
+    ```http
+    PUT http://127.0.0.1:8000/api/books/1
+    ```
+    **Body (JSON)**:
+    ```json
+    {
+      "title": "Yeni Kitap Adı"
+    }
+    ```
+    Bu istek, belirli bir kitabın bilgilerini günceller.
+
+  - **Kitap Silme (DELETE)**:
+    ```http
+    DELETE http://127.0.0.1:8000/api/books/1
+    ```
+    Bu istek, belirli bir kitabı siler.
+
+
 
 ## Lisans
 
