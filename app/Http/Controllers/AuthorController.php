@@ -52,11 +52,14 @@ class AuthorController extends Controller
     * Store a newly created author.
     *
     * @param StoreAuthorRequest $request
-    * @return JsonResponse
     */
-    public function store(StoreAuthorRequest $request): JsonResponse
+    public function store(StoreAuthorRequest $request)
     {
         $author = $this->authorRepository->create($request);
+
+        if ($author === false) {
+            return $this->errorResponse(__('app.author_found'), 409);
+        }
 
         return $this->successResponse(__('app.author_added'), new AuthorResource($author));
     }

@@ -47,8 +47,18 @@ class AuthorRepository implements AuthorRepositoryInterface
      * @param StoreAuthorRequest $request
      * @return Model
      */
-    public function create(StoreAuthorRequest $request): Model
+    public function create(StoreAuthorRequest $request)
     {
+        // existing user control
+        $existingAuthor = Author::where('name', $request->name)
+        ->where('surname', $request->surname) 
+        ->first();
+
+        // if user exists, return false
+        if ($existingAuthor) {
+            return false; 
+        }
+
         $author = Author::create($request->validated());
 
         // Check if an image is uploaded and upload it

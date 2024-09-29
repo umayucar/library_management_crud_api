@@ -28,9 +28,8 @@ interface AuthorRepositoryInterface
     * Store a new author.
     *
     * @param StoreAuthorRequest $request
-    * @return Model
     */
-    public function create(StoreAuthorRequest $request): Model;
+    public function create(StoreAuthorRequest $request);
 
     /**
     * Update the media for a given author.

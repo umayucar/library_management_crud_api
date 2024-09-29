@@ -36,7 +36,7 @@ trait RespondsWithJson
         return response()->json([
             'success' => false,
             'message' => $message,
-            'errors' => $errors,
+            //'errors' => $errors,
         ], $statusCode);
     }
 

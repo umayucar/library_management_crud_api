@@ -21,6 +21,7 @@ return [
     'author_updated' => 'Yazar başarıyla güncellendi.',
     'author_deleted' => 'Yazar başarıyla silindi.',
     'author_not_found' => 'Yazar bulunamadı.',
+    'author_found' => 'Yazar zaten mevcut.',
     
     // User Messages
     'user_added' => 'Kullanıcı başarıyla eklendi.',
