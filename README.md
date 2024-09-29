@@ -123,13 +123,14 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```http
     POST http://127.0.0.1:8000/api/authors
     ```
-    **Body (JSON)**:
-    ```json
-    {
-      "name": "Yazar Adı",
-      "bio": "Yazar biyografisi"
-    }
-    ```
+    **Form-Data:**
+
+    | Key            | Value                | Açıklama                |
+    |----------------|----------------------|-------------------------|
+    | `name`         | Örnek Ad             | Yazarın adı             |
+    | `biography`    | Biyografi            | Yazarın Bilgileri       |
+    | `media`        | (Dosya Seç)          | Profil fotoğrafı (image)|
+
     Yeni bir yazar eklemek için kullanılır.
 
   - **Yazar Listeleme (GET)**:
@@ -142,13 +143,25 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```http
     PUT http://127.0.0.1:8000/api/authors/1
     ```
-    **Body (JSON)**:
-    ```json
-    {
-      "name": "Yeni Yazar Adı"
-    }
-    ```
+     **x-www-form-urlencoded**
+
+    | Key            | Value                | Açıklama                |
+    |----------------|----------------------|-------------------------|
+    | `name`         | Örnek Yeni Ad        | Yazarın adı             |
+    
     Yazar bilgilerini günceller.
+
+   - **Yazar Profil Fotoğrafı Güncelleme (POST)**:
+    ```http
+    POST http://127.0.0.1:8000/api/authors/1/media
+    ```
+    **x-www-form-urlencoded**
+
+    | Key            | Value                | Açıklama                |
+    |----------------|----------------------|-------------------------|
+    | `image`        | (Dosya Seç)          | Yazarın Yeni Fotoğrafı  |
+    
+    Bu istek, belirli bir yazarın profil fotoğrafını günceller.
 
   - **Yazar Silme (DELETE)**:
     ```http
@@ -160,13 +173,16 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```http
     POST http://127.0.0.1:8000/api/books
     ```
-    **Body (JSON)**:
-    ```json
-    {
-      "title": "Kitap Adı",
-      "author_id": 1,
-      "published_year": "2023"
-    }
+    **Form-Data:**
+
+    | Key            | Value                | Açıklama                |
+    |----------------|----------------------|-------------------------|
+    | `title`        | Örnek Başlık          | Kitabın başlığı        |
+    | `author_id`    | 1                     | Yazarın ID'si          |
+    | `description`  | Örnek Açıklama        | Kitap açıklaması       |
+    | `library_id`   | 1                     | Bulunduğu kütüphane    |
+    | `image`        | (Dosya Seç)           | Kitap kapağı (image)   |
+
     ```
     Bu istek, yeni bir kitap eklemenizi sağlar.
 
@@ -186,12 +202,12 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```http
     PUT http://127.0.0.1:8000/api/books/1
     ```
-    **Body (JSON)**:
-    ```json
-    {
-      "title": "Yeni Kitap Adı"
-    }
-    ```
+    **x-www-form-urlencoded**
+
+    | Key            | Value                | Açıklama                |
+    |----------------|----------------------|-------------------------|
+    | `title`        | Örnek Yeni Başlık    | Kitabın Yeni Başlığı    |
+    
     Bu istek, belirli bir kitabın bilgilerini günceller.
 
   - **Kitap Silme (DELETE)**:
@@ -199,6 +215,18 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     DELETE http://127.0.0.1:8000/api/books/1
     ```
     Bu istek, belirli bir kitabı soft delete methodu ile siler.
+
+  - **Kitap Kapak Fotoğrafı Güncelleme (POST)**:
+    ```http
+    POST http://127.0.0.1:8000/api/books/1/media
+    ```
+    **x-www-form-urlencoded**
+
+    | Key            | Value                | Açıklama                |
+    |----------------|----------------------|-------------------------|
+    | `image`        | (Dosya Seç)          | Yeni Kapak Fotoğrafı    |
+    
+    Bu istek, belirli bir kitabın kapak fotoğrafını günceller.  
 
 ### 3. Authorization (Yetkilendirme)
 
