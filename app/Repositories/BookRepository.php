@@ -21,10 +21,10 @@ class BookRepository implements BookRepositoryInterface
     }
 
     /**
-     * Retrieve all books.
-     *
-     * @return Collection
-     */
+    * Retrieve all books.
+    *
+    * @return Collection
+    */
     public function all(): Collection
     {
         //return Book::all();
@@ -32,11 +32,11 @@ class BookRepository implements BookRepositoryInterface
     }
 
     /**
-     * Find a book by its ID.
-     *
-     * @param int $id
-     * @return Model|null
-     */
+    * Find a book by its ID.
+    *
+    * @param int $id
+    * @return Model|null
+    */
     public function find($id): ?Model
     {
         return Book::with('author', 'library', 'media')->find($id);
@@ -68,12 +68,12 @@ class BookRepository implements BookRepositoryInterface
     }
 
     /**
-     * Update an existing book.
-     *
-     * @param UpdateBookRequest $request
-     * @param Model $model
-     * @return Model
-     */
+    * Update an existing book.
+    *
+    * @param UpdateBookRequest $request
+    * @param Model $model
+    * @return Model
+    */
     public function update(UpdateBookRequest $request, Model $model): Model
     {
         $model->update($request->validated());
@@ -119,6 +119,43 @@ class BookRepository implements BookRepositoryInterface
         $model->load('media');
 
         return $model;    
+    }
+
+    /**
+    * Get versions for the book by its ID.
+    *
+    * @param int $id
+    */
+    public function getVersion($id)
+    {
+        $book = $this->find($id);
+    
+        if (!$book) {
+            return response()->json(['error' => __('app.book_not_found')], 404); 
+        }
+    
+        $versions = $book->versions;
+    
+        if ($versions->isEmpty()) {
+            return response()->json(['error' => __('app.version_not_found')], 404); 
+        }
+    
+        $formattedVersions = $versions->map(function ($version) {
+            $modelData = unserialize($version->model_data);
+            return [
+                'version_id' => $version->version_id,
+                'versionable_id' => $version->versionable_id,
+                'user_id' => $version->user_id,
+                'data' => $modelData,
+                'created_at' => $version->created_at->format('Y-m-d H:i:s'),
+            ];
+        });
+    
+        return response()->json([
+            'success' => true,
+            'message' => __('app.version_found'),
+            'data' => $formattedVersions
+        ]);
     }
 
     /**

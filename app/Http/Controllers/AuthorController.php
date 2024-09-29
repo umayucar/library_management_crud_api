@@ -101,9 +101,28 @@ class AuthorController extends Controller
         return $this->successResponse(__('app.author_deleted'));
     }
 
+
+    /**
+    * Update the specified image.
+    *
+    * @param Request $request
+    * @param int $id
+    * @return JsonResponse
+    */
     public function updateMedia(Request $request, Author $author)
     {
         $updated = $this->authorRepository->updateMedia($request, $author);
         return response()->json(['message' => __('app.media_updated'), 'author' => new AuthorResource($updated)]);     
+    }
+
+    /**
+    * Get the author's versions based on the provided author ID.
+    *
+    * @param int $id The unique identifier of the author whose versions are to be retrieved.
+    *
+    */
+    public function getVersions($id)
+    {
+        return $this->authorRepository->getVersion($id);
     }
 }

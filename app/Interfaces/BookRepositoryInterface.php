@@ -41,6 +41,15 @@ interface BookRepositoryInterface
     */
     public function update(UpdateBookRequest $request, Model $model): Model;
 
+
+    /**
+    * Get versions of the model.
+    *
+    * @param int $id
+    * @return Model|null
+    */
+    public function getVersion($id);
+
     /**
     * Update the media for a given book.
     *

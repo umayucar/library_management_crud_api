@@ -49,6 +49,15 @@ interface AuthorRepositoryInterface
      */
     public function update(UpdateAuthorRequest $request, Model $model): Model;
 
+
+    /**
+    * Get versions of the model.
+    *
+    * @param int $id
+    * @return Model|null
+    */
+    public function getVersion($id);
+
     /**
     * Delete an author by their ID.
     *

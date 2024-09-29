@@ -96,9 +96,27 @@ class BookController extends Controller
         return $this->successResponse(__('app.book_deleted'));
     }
 
+    /**
+    * Update the specified image.
+    *
+    * @param Request $request
+    * @param int $id
+    * @return JsonResponse
+    */
     public function updateMedia(Request $request, Book $book)
     {
         $updated = $this->bookRepository->updateMedia($request, $book);
         return response()->json(['message' => __('app.media_updated'), 'author' => new BookResource($updated)]); 
+    }
+
+    /**
+    * Get the books' versions based on the provided author ID.
+    *
+    * @param int $id The unique identifier of the author whose versions are to be retrieved.
+    *
+    */
+    public function getVersions($id)
+    {
+        return $this->bookRepository->getVersion($id);
     }
 }

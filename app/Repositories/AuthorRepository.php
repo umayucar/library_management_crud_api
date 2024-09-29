@@ -111,6 +111,45 @@ class AuthorRepository implements AuthorRepositoryInterface
         return $model;     
     }
 
+
+    /**
+    * Get versions for the author by its ID.
+    *
+    * @param int $id
+    */
+    public function getVersion($id)
+    {
+        $author = $this->find($id);
+    
+        if (!$author) {
+            return response()->json(['error' => __('app.author_not_found')], 404); 
+        }
+    
+        $versions = $author->versions;
+    
+        if ($versions->isEmpty()) {
+            return response()->json(['error' => __('app.version_not_found')], 404); 
+        }
+    
+        $formattedVersions = $versions->map(function ($version) {
+            $modelData = unserialize($version->model_data);
+            return [
+                'version_id' => $version->version_id,
+                'versionable_id' => $version->versionable_id,
+                'user_id' => $version->user_id,
+                'data' => $modelData,
+                'created_at' => $version->created_at->format('Y-m-d H:i:s'),
+            ];
+        });
+    
+        return response()->json([
+            'success' => true,
+            'message' => __('app.version_found'),
+            'data' => $formattedVersions
+        ]);
+    }
+    
+
     /**
     * Delete an author by their ID.
     *

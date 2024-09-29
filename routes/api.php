@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // for media updates:
     Route::post('/books/{book}/media', [BookController::class, 'updateMedia']);
     Route::post('/authors/{author}/media', [AuthorController::class, 'updateMedia']);
+
+    Route::get('/authors/{id}/versions', [AuthorController::class, 'getVersions']);
+    Route::get('/books/{id}/versions', [BookController::class, 'getVersions']);
 });
-
-

@@ -38,4 +38,7 @@ return [
     'media_updated' => 'Resim başarıyla güncellendi.',
     'media_not_found' => 'Resim bulunamadı.',
 
+    // Version Messages
+    'version_not_found' => 'Versiyon kaydı bulunamadı.',
+    'version_found' => 'Versiyon kaydı bulundu.',
 ];
