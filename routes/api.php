@@ -26,3 +26,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/authors/{author}/media', [AuthorController::class, 'updateMedia']);
 });
 
+
