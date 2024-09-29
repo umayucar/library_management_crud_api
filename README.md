@@ -7,60 +7,100 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# Kütüphane Yönetim Sistemi
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Bu proje, Laravel ve MySQL kullanarak bir kütüphane yönetim sistemi geliştirmeyi amaçlamaktadır. Sistem, kitaplar, yazarlar ve kütüphaneler arasındaki ilişkileri yönetmekte ve kullanıcıların kitap ve yazar bilgilerini eklemesine, düzenlemesine ve silmesine olanak tanımaktadır. Ayrıca, yapılan değişikliklerin geriye dönük olarak kayıt altına alınması ve medya dosyalarının yüklenmesi gibi özellikler de bu sistemin bir parçasıdır.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Proje Amacı
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Kütüphane Yönetim Sistemi, nesne yönelimli programlama (OOP) prensiplerine uygun olarak geliştirilmiştir ve aşağıdaki işlevleri yerine getirmektedir:
 
-## Learning Laravel
+- Kitaplar, yazarlar ve kütüphaneler arasında ilişkileri yönetmek.
+- Kitap ve yazarlar üzerinde CRUD (Create, Read, Update, Delete) işlemleri yapabilmek.
+- Yapılan değişikliklerin geriye dönük olarak kayıt altına alınması (Revizyon Takibi).
+- Kitaplar ve yazarlar için medya dosyaları (kapak fotoğrafları vb.) yüklenebilmesi.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Gereksinimler
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Genel Gereksinimler
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Varlıklar**: Kitaplar, yazarlar ve kütüphaneler olmak üzere üç temel varlık oluşturulacaktır.
+- **CRUD İşlemleri**: Kitaplar ve yazarlar üzerinde ekleme, düzenleme ve silme işlemleri yapılabilecektir.
+- **Revizyon Takibi**: Yapılan değişikliklerin (örneğin isim değişiklikleri, güncelleme zamanları) geriye dönük kayıtları tutulacaktır.
+- **Medya Yükleme**: Kitaplar ve yazarlar için medya dosyaları (örneğin kapak fotoğrafları, biyografi görselleri) yüklenebilecektir.
 
-## Laravel Sponsors
+### Teknik Gereksinimler
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Geliştirme Dili**: PHP (Laravel Framework).
+- **Veritabanı**: MySQL.
+- **Kod Yapısı**: Object-Oriented Programming (OOP) prensiplerine uygun olarak yapılandırılmıştır.
+- **Ek Paketler**:
+  - [Spatie Media Library](https://spatie.be/docs/laravel-medialibrary) paketi, kitaplar ve yazarlar için medya yönetimini sağlamak için kullanılacaktır.
+  - [Versionable](https://github.com/mpociot/versionable) paketi, model revizyonlarının takibini yapmak için entegre edilecektir.
 
-### Premium Partners
+## Kurulum
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Projeyi yerel ortamınıza kurmak için aşağıdaki adımları izleyin:
 
-## Contributing
+### Gereksinimler
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Bu projenin çalışabilmesi için aşağıdaki gereksinimlerin karşılandığından emin olun:
 
-## Code of Conduct
+- PHP >= 8.0
+- Composer
+- MySQL
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Adımlar
 
-## Security Vulnerabilities
+1. **Depoyu klonlayın**:
+    ```bash
+    git clone https://github.com/kullanici-adi/proje-adi.git
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. **Proje dizinine geçin**:
+    ```bash
+    cd proje-adi
+    ```
 
-## License
+3. **Gerekli bağımlılıkları yükleyin**:
+    ```bash
+    composer install
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **.env dosyasını yapılandırın**:
+    - `.env.example` dosyasını kopyalayarak bir `.env` dosyası oluşturun:
+      ```bash
+      cp .env.example .env
+      ```
+    - `.env` dosyasında veritabanı ve diğer yapılandırmaları güncelleyin.
+
+5. **Veritabanını oluşturun**:
+    ```bash
+    php artisan migrate
+    ```
+
+6. **Geliştirme sunucusunu başlatın**:
+    ```bash
+    php artisan serve
+    ```
+
+## Kullanılan Paketler
+
+- **Spatie Media Library**: Kitaplar ve yazarlar için medya yönetimi (kapak fotoğrafı vb.) işlevini sağlar.
+- **Versionable**: Kitap ve yazarlar üzerindeki değişiklikleri geriye dönük olarak kayıt altına alır.
+
+## Özellikler
+
+- **Kitap ve Yazar Yönetimi**: CRUD işlemleri yapılabilmektedir.
+- **Revizyon Takibi**: Yapılan değişiklikler Versionable paketi ile kaydedilmektedir.
+- **Medya Yönetimi**: Kitaplara ve yazarlara medya dosyaları yüklenebilir.
+
+## Geliştirici Notları
+
+- Bu proje OOP prensiplerine uygun olarak geliştirilmiştir.
+- Laravel'in güçlü ORM yapısı ve paket entegrasyonları kullanılmıştır.
+
+## Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına bakın.
+
