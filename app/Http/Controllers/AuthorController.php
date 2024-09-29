@@ -58,7 +58,7 @@ class AuthorController extends Controller
         $author = $this->authorRepository->create($request);
 
         if ($author === false) {
-            return $this->errorResponse(__('app.author_found'), 409);
+            return $this->errorResponse(__('app.author_exists'), 409);
         }
 
         return $this->successResponse(__('app.author_added'), new AuthorResource($author));
