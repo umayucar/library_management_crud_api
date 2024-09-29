@@ -200,6 +200,15 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```
     Bu istek, belirli bir kitabı soft delete methodu ile siler.
 
+### 3. Authorization (Yetkilendirme)
+
+API endpointlerine erişim için yetkilendirme gereklidir, bu yüzden Postman'de yetkilendirme bilgileri eklenmelidir. Bu projede Laravel Sanctum kullanıldığı için, **Bearer Token** kullanarak yetkilendirme yapılacaktır:
+
+1. **Postman'de yeni bir istek oluşturun**.
+2. Üst menüde **Authorization** sekmesine gidin.
+3. **Type** olarak `Bearer Token` seçin.
+4. Token alanına API'den aldığınız `access_token` bilgisini girin.
+
 ## Lisans
 
 Bu proje MIT lisansı altında lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına bakın.
