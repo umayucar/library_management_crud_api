@@ -168,6 +168,13 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     DELETE http://127.0.0.1:8000/api/authors/1
     ```
     Belirli bir yazarı soft delete methodu ile siler.
+
+  - **Yazar Güncelleme için Versiyon Listesi (GET)**:
+    ```http
+    GET http://127.0.0.1:8000/api/authors/1/versions
+    ```
+    Bu istek, belirli bir yazar kaydı için yapılan güncellemeler sonucunda oluşan versiyonları listeler.
+    İstek URL'sinde belirtilen 1 yazar ID'sidir ve bu yazar kaydı ile ilgili tüm versiyon bilgilerini döner.
     
   - **Kitap Ekleme (POST)**:
     ```http
@@ -225,7 +232,14 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     |----------------|----------------------|-------------------------|
     | `image`        | (Dosya Seç)          | Yeni Kapak Fotoğrafı    |
     
-    Bu istek, belirli bir kitabın kapak fotoğrafını günceller.  
+    Bu istek, belirli bir kitabın kapak fotoğrafını günceller.
+
+  - **Kitap Güncelleme için Versiyon Listesi (GET)**:
+    ```http
+    GET http://127.0.0.1:8000/api/books/1/versions
+    
+    Bu istek, belirli bir kitabın yapılan güncellemeleri sonucunda oluşan versiyonlarını listeler.
+    İstek URL'sinde belirtilen 1 kitap ID'sidir ve bu kitap ile ilgili tüm versiyon bilgilerini döner.
 
 ### 3. Authorization (Yetkilendirme)
 
