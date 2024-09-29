@@ -161,7 +161,7 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```http
     DELETE http://127.0.0.1:8000/api/books/1
     ```
-    Bu istek, belirli bir kitabı siler.
+    Bu istek, belirli bir kitabı soft delete methodu ile siler.
 
 
 
