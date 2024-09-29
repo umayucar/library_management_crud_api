@@ -183,7 +183,6 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     | `library_id`   | 1                     | Bulunduğu kütüphane    |
     | `image`        | (Dosya Seç)           | Kitap kapağı (image)   |
 
-    ```
     Bu istek, yeni bir kitap eklemenizi sağlar.
 
   - **Kitap Listeleme (GET)**:
