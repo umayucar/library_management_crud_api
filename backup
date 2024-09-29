@@ -1,0 +1,271 @@
+-- -------------------------------------------------------------
+-- TablePlus 6.1.6(570)
+--
+-- https://tableplus.com/
+--
+-- Database: library_management_api
+-- Generation Time: 2024-09-29 08:14:16.2380
+-- -------------------------------------------------------------
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+CREATE TABLE `authors` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `biography` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `books` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` bigint unsigned NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `publication_year` int DEFAULT NULL,
+  `publisher` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page_count` int DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `books_author_id_foreign` (`author_id`),
+  CONSTRAINT `books_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `cache` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `cache_locks` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `job_batches` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_jobs` int NOT NULL,
+  `pending_jobs` int NOT NULL,
+  `failed_jobs` int NOT NULL,
+  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext COLLATE utf8mb4_unicode_ci,
+  `cancelled_at` int DEFAULT NULL,
+  `created_at` int NOT NULL,
+  `finished_at` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint unsigned NOT NULL,
+  `reserved_at` int unsigned DEFAULT NULL,
+  `available_at` int unsigned NOT NULL,
+  `created_at` int unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `jobs_queue_index` (`queue`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `libraries` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `library_books` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `library_id` bigint unsigned NOT NULL,
+  `book_id` bigint unsigned NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `library_books_library_id_foreign` (`library_id`),
+  KEY `library_books_book_id_foreign` (`book_id`),
+  CONSTRAINT `library_books_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `library_books_library_id_foreign` FOREIGN KEY (`library_id`) REFERENCES `libraries` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `media` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint unsigned NOT NULL,
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `collection_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mime_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `disk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `conversions_disk` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` bigint unsigned NOT NULL,
+  `manipulations` json NOT NULL,
+  `custom_properties` json NOT NULL,
+  `generated_conversions` json NOT NULL,
+  `responsive_images` json NOT NULL,
+  `order_column` int unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `media_uuid_unique` (`uuid`),
+  KEY `media_model_type_model_id_index` (`model_type`,`model_id`),
+  KEY `media_order_column_index` (`order_column`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sessions_user_id_index` (`user_id`),
+  KEY `sessions_last_activity_index` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `surname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `versions` (
+  `version_id` int unsigned NOT NULL AUTO_INCREMENT,
+  `versionable_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `versionable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `model_data` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reason` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`version_id`),
+  KEY `versions_versionable_id_index` (`versionable_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `authors` (`id`, `name`, `biography`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'J.K. Rowling', 'Harry Potter adlı fantastik roman serisinin İngiliz yazarı.', 1, NULL, '2024-09-29 04:00:57', '2024-09-29 04:02:05');
+
+INSERT INTO `books` (`id`, `author_id`, `title`, `description`, `publication_year`, `publisher`, `page_count`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Harry Potter ve Felsefe Taşı', 'Harry Potter serisinin ilk kitabı', 1997, 'YKY', 230, 1, NULL, '2024-09-29 04:20:14', '2024-09-29 04:23:04');
+
+INSERT INTO `libraries` (`id`, `name`, `location`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'Merkez Kütüphane', 'İstanbul', 1, NULL, '2024-09-29 04:00:02', '2024-09-29 04:00:02'),
+(2, 'Kütüphane A', 'İstanbul', 1, NULL, '2024-09-29 04:00:02', '2024-09-29 04:00:02'),
+(3, 'Kütüphane B', 'Bursa', 1, NULL, '2024-09-29 04:00:02', '2024-09-29 04:00:02');
+
+INSERT INTO `library_books` (`id`, `library_id`, `book_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, NULL, NULL);
+
+INSERT INTO `media` (`id`, `model_type`, `model_id`, `uuid`, `collection_name`, `name`, `file_name`, `mime_type`, `disk`, `conversions_disk`, `size`, `manipulations`, `custom_properties`, `generated_conversions`, `responsive_images`, `order_column`, `created_at`, `updated_at`) VALUES
+(2, 'App\\Models\\Author', 1, '38df2295-0b86-4bf1-a3e5-34fdc5a1efa2', 'author', 'J.K-Rowling', 'J.K-Rowling.jpg', 'image/jpeg', 'public', 'public', 123587, '[]', '[]', '[]', '[]', 1, '2024-09-29 04:16:54', '2024-09-29 04:16:54'),
+(4, 'App\\Models\\Book', 1, 'e705945f-98f9-4d42-a87b-c374f4de3d6f', 'book', '0000000105599-1', '0000000105599-1.jpg', 'image/jpeg', 'public', 'public', 58081, '[]', '[]', '[]', '[]', 1, '2024-09-29 04:24:43', '2024-09-29 04:24:43');
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '0001_01_01_000000_create_users_table', 1),
+(2, '0001_01_01_000001_create_cache_table', 1),
+(3, '0001_01_01_000002_create_jobs_table', 1),
+(4, '2014_09_27_212641_create_versions_table', 1),
+(5, '2024_09_25_160252_create_personal_access_tokens_table', 1),
+(6, '2024_09_25_160829_create_media_table', 1),
+(7, '2024_09_25_161000_create_authors_table', 1),
+(8, '2024_09_25_161001_create_libraries_table', 1),
+(9, '2024_09_25_161003_create_books_table', 1),
+(10, '2024_09_27_073917_create_library_books_table', 1);
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\User', 1, 'MyApp', '4f49f3d152c6b6d8b57d71d4fa38f5d216a758c1009b9673eb6c9da80161cdfd', '[\"*\"]', NULL, NULL, '2024-09-29 04:00:15', '2024-09-29 04:00:15'),
+(2, 'App\\Models\\User', 1, 'MyApp', 'b8fc2892fbe63851fb82b77fe5945e6e204e105c48de164c1e6a11ce872f308b', '[\"*\"]', '2024-09-29 04:59:29', NULL, '2024-09-29 04:00:23', '2024-09-29 04:59:29');
+
+INSERT INTO `users` (`id`, `name`, `surname`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Ayşegül Umay', 'Uçar', 'aysegul@example.com', NULL, '$2y$12$9tc7xKbYKYRMfAUDVNiyouwd9mWTuG2.BgDVeGkLh.DPdFaZESLiW', NULL, '2024-09-29 04:00:15', '2024-09-29 04:00:15');
+
+INSERT INTO `versions` (`version_id`, `versionable_id`, `versionable_type`, `user_id`, `model_data`, `reason`, `created_at`, `updated_at`) VALUES
+(1, '1', 'App\\Models\\Author', '1', 'a:4:{s:4:\"name\";s:12:\"J.K. Rowling\";s:10:\"updated_at\";s:27:\"2024-09-29T04:00:57.000000Z\";s:10:\"created_at\";s:27:\"2024-09-29T04:00:57.000000Z\";s:2:\"id\";i:1;}', NULL, '2024-09-29 04:00:57', '2024-09-29 04:00:57'),
+(2, '1', 'App\\Models\\Author', '1', 'a:7:{s:2:\"id\";i:1;s:4:\"name\";s:12:\"J.K. Rowling\";s:9:\"biography\";s:62:\"Harry Potter adlı fantastik roman serisinin İngiliz yazarı.\";s:6:\"status\";i:1;s:10:\"deleted_at\";N;s:10:\"created_at\";s:27:\"2024-09-29T04:00:57.000000Z\";s:10:\"updated_at\";s:27:\"2024-09-29T04:02:05.000000Z\";}', NULL, '2024-09-29 04:02:05', '2024-09-29 04:02:05'),
+(3, '1', 'App\\Models\\Book', '1', 'a:7:{s:5:\"title\";s:30:\"Harry Potter ve Felsefe Taşı\";s:9:\"author_id\";s:1:\"1\";s:16:\"publication_year\";s:4:\"1997\";s:10:\"page_count\";s:3:\"230\";s:10:\"updated_at\";s:27:\"2024-09-29T04:20:14.000000Z\";s:10:\"created_at\";s:27:\"2024-09-29T04:20:14.000000Z\";s:2:\"id\";i:1;}', NULL, '2024-09-29 04:20:14', '2024-09-29 04:20:14'),
+(4, '1', 'App\\Models\\Book', '1', 'a:11:{s:2:\"id\";i:1;s:9:\"author_id\";i:1;s:5:\"title\";s:30:\"Harry Potter ve Felsefe Taşı\";s:11:\"description\";s:34:\"Harry Potter serisinin ilk kitabı\";s:16:\"publication_year\";i:1997;s:9:\"publisher\";s:3:\"YKY\";s:10:\"page_count\";i:230;s:6:\"status\";i:1;s:10:\"deleted_at\";N;s:10:\"created_at\";s:27:\"2024-09-29T04:20:14.000000Z\";s:10:\"updated_at\";s:27:\"2024-09-29T04:23:04.000000Z\";}', NULL, '2024-09-29 04:23:04', '2024-09-29 04:23:04');
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
