@@ -119,7 +119,7 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
   
   ### Örnek API İstekleri
   
-   - **Yazar Ekleme (POST)**:
+  - **Yazar Ekleme (POST)**:
     ```http
     POST http://127.0.0.1:8000/api/authors
     ```
@@ -127,8 +127,7 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```json
     {
       "name": "Yazar Adı",
-      "surname": "Yazar Soyadı",
-      "biography": "Yazar Biyografisi"
+      "bio": "Yazar biyografisi"
     }
     ```
     Yeni bir yazar eklemek için kullanılır.
@@ -137,13 +136,7 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```http
     GET http://127.0.0.1:8000/api/authors
     ```
-    Mevcut tüm yazarları listeler.
-
-  - **Yazar Detay Görüntüleme (GET)**:
-    ```http
-    GET http://127.0.0.1:8000/api/authors/1
-    ```
-    Bu istek, belirli bir yazarın detayını döner (yazar ID'si ile istek gönderilir).
+    Mevcut yazarları listeler.
 
   - **Yazar Güncelleme (PUT)**:
     ```http
@@ -161,8 +154,8 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     ```http
     DELETE http://127.0.0.1:8000/api/authors/1
     ```
-    Belirli bir yazarı siler.
-  
+    Belirli bir yazarı soft delete methodu ile siler.
+    
   - **Kitap Ekleme (POST)**:
     ```http
     POST http://127.0.0.1:8000/api/books
@@ -206,8 +199,6 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     DELETE http://127.0.0.1:8000/api/books/1
     ```
     Bu istek, belirli bir kitabı soft delete methodu ile siler.
-
-
 
 ## Lisans
 
