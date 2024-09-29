@@ -152,10 +152,10 @@ Projenizde bulunan API endpointlerini Postman'de test etmek için aşağıdaki a
     Yazar bilgilerini günceller.
 
    - **Yazar Profil Fotoğrafı Güncelleme (POST)**:
-    ```http
-    POST http://127.0.0.1:8000/api/authors/1/media
-    ```
-     **x-www-form-urlencoded**
+     ```http
+     POST http://127.0.0.1:8000/api/authors/1/media
+     ```
+      **x-www-form-urlencoded**
 
     | Key            | Value                | Açıklama                |
     |----------------|----------------------|-------------------------|
