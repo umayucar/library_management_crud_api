@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('surname');
             $table->text('biography')->nullable()->default(null);
             $table->boolean('status')->default(1);
             $table->softDeletes();

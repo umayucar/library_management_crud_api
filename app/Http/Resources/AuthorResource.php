@@ -17,7 +17,6 @@ class AuthorResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'surname' => $this->surname,
             'biography' => $this->biography,
             'media' => $this->whenLoaded('media', function () {
                 return $this->media->map(function ($mediaItem) {

@@ -50,9 +50,7 @@ class AuthorRepository implements AuthorRepositoryInterface
     public function create(StoreAuthorRequest $request)
     {
         // existing user control
-        $existingAuthor = Author::where('name', $request->name)
-        ->where('surname', $request->surname) 
-        ->first();
+        $existingAuthor = Author::where('name', $request->name)->first();
 
         // if user exists, return false
         if ($existingAuthor) {

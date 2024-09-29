@@ -23,7 +23,6 @@ class UpdateAuthorRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string|max:255',
-            'surname' => 'nullable|string|max:255',
             'biography' => 'nullable|string',
             //'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];

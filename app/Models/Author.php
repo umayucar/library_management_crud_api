@@ -14,7 +14,7 @@ class Author extends Model implements HasMedia
     use HasFactory, VersionableTrait, SoftDeletes, InteractsWithMedia;
 
     // Define fillable attributes for mass assignment
-    protected $fillable = ['name', 'surname', 'biography'];
+    protected $fillable = ['name', 'biography'];
 
     // Automatically make all fillable attributes versionable
     protected $versionable = ['*'];
