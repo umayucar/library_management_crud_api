@@ -79,9 +79,17 @@ Bu projenin çalışabilmesi için aşağıdaki gereksinimlerin karşılandığ�
     php artisan migrate
     ```
 
-6. **Geliştirme sunucusunu başlatın**:
+6. **Seeder'ları çalıştırın**:
+    Projenin örnek verilerle başlatılması için seed dosyalarını çalıştırın:
+    ```bash
+    php artisan db:seed
+    ```
+    Bu komut, `database/seeders` klasöründe tanımlı olan tüm seeder'ları çalıştırarak veritabanınıza başlangıç verilerini ekleyecektir.
+
+7. **Geliştirme sunucusunu başlatın**:
     ```bash
     php artisan serve
+    ```
     ```
 
 ## Kullanılan Paketler
